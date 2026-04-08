@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Calendar Body -->
+  <rect x="8" y="16" width="48" height="40" rx="6" fill="#ffffff" stroke="#0ba3e0" stroke-width="4"/>
+  
+  <!-- Calendar Header (Filled) -->
+  <path d="M8 22 C 8 18.686 10.686 16 14 16 L50 16 C 53.314 16 56 18.686 56 22 L56 28 L8 28 Z" fill="#0ba3e0" />
+  <path d="M8 28 L56 28" stroke="#0ba3e0" stroke-width="4"/>
+  
+  <!-- Spiral Bindings -->
+  <rect x="16" y="8" width="4" height="16" rx="2" fill="#222222" stroke="#ffffff" stroke-width="1"/>
+  <rect x="30" y="8" width="4" height="16" rx="2" fill="#222222" stroke="#ffffff" stroke-width="1"/>
+  <rect x="44" y="8" width="4" height="16" rx="2" fill="#222222" stroke="#ffffff" stroke-width="1"/>
+  
+  <!-- Simple Grid Dots -->
+  <circle cx="20" cy="42" r="3.5" fill="#0ba3e0"/>
+  <circle cx="32" cy="42" r="3.5" fill="#dddddd"/>
+  <circle cx="44" cy="42" r="3.5" fill="#dddddd"/>
+</svg>
