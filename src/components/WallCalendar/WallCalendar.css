@@ -1,0 +1,409 @@
+.wall-calendar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+  perspective: 1000px;
+}
+
+.wall-calendar {
+  width: 100%;
+  max-width: 520px;
+  height: 720px;
+  background: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 
+    0 30px 60px -15px rgba(0,0,0,0.2),
+    0 10px 20px -10px rgba(0,0,0,0.1);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wall-calendar:hover {
+  transform: translateY(-5px) rotateX(2deg);
+  box-shadow: 
+    0 40px 70px -15px rgba(0,0,0,0.25),
+    0 15px 25px -10px rgba(0,0,0,0.1);
+}
+
+/* Spiral Binding */
+.spirals-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 0 auto;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  z-index: 10;
+}
+
+.spiral {
+  width: 6px;
+  height: 24px;
+  background: linear-gradient(to right, #111, #555, #111);
+  border-radius: 3px;
+  position: relative;
+  top: -12px;
+  box-shadow: 1px 2px 2px rgba(0,0,0,0.4);
+}
+
+.spiral::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+  box-shadow: inset 1px 2px 3px rgba(0,0,0,0.8);
+}
+
+/* Hanging Hook */
+.hanging-hook {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 35px;
+  z-index: 5;
+}
+
+.hanging-hook svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+}
+
+/* Hero Section */
+.wc-hero {
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.wc-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Geometric Overlay Shape */
+.wc-shape-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: var(--theme-primary, #0ba3e0);
+  clip-path: polygon(0 40%, 40% 100%, 75% 15%, 100% 50%, 100% 100%, 0 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 15px 30px;
+  color: white;
+  transition: background-color 0.4s ease;
+}
+
+.wc-year {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.wc-month-text {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Bottom Half Layout */
+.wc-bottom {
+  display: flex;
+  padding: 25px;
+  gap: 20px;
+  background: white;
+  flex: 1; /* Stretch to fill bottom of the fixed height */
+}
+
+/* Save Button */
+.wc-save-btn {
+  background: transparent;
+  border: 1px solid #ddd;
+  color: #666;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wc-save-btn:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.wc-save-btn.saved {
+  background: #e8f5e9;
+  border-color: #81c784;
+  color: #2e7d32;
+}
+
+/* Clear Button */
+.wc-clear-btn {
+  background: transparent;
+  border: 1px solid #ffcdd2;
+  color: #e53935;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wc-clear-btn:hover {
+  background: #ffebee;
+}
+
+/* Notes Section */
+.wc-notes {
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+}
+
+.wc-notes h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.wc-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.notes-textarea {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  resize: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 24px; /* Matches line height of lines */
+  color: #222;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+}
+
+.wc-line {
+  border-bottom: 1px solid #ddd;
+  height: 8px;
+  margin-bottom: 16px;
+}
+
+/* Calendar Grid */
+.wc-calendar {
+  flex: 1;
+}
+
+.wc-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.wc-day-name {
+  color: #666;
+  text-transform: uppercase;
+}
+.wc-day-name.weekend {
+  color: var(--theme-primary, #0ba3e0);
+}
+
+.wc-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 12px;
+}
+
+.wc-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.wc-day-cell.other-month {
+  color: #ccc;
+  font-weight: 500;
+}
+
+.wc-day-cell.weekend-day {
+  color: var(--theme-primary, #0ba3e0);
+}
+.wc-day-cell.other-month.weekend-day {
+  color: color-mix(in srgb, var(--theme-primary) 40%, #ccc);
+}
+
+.wc-day-cell:hover:not(.selected) {
+  background: #f0f0f0;
+}
+
+.wc-day-cell.today {
+  border: 1px solid var(--theme-primary, #0ba3e0);
+}
+
+.wc-day-cell.selected {
+  background: var(--theme-primary, #0ba3e0);
+  color: white;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--theme-primary) 40%, transparent);
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.wc-day-cell.in-range {
+  background: color-mix(in srgb, var(--theme-primary) 15%, transparent);
+  border-radius: 0;
+}
+
+/* Connect the range visually */
+.wc-day-cell.range-start {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.wc-day-cell.range-end {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Calendar Navigation */
+.wc-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  border: none;
+  color: #333;
+  transition: all 0.2s;
+  opacity: 0;
+}
+
+.wall-calendar-wrapper:hover .wc-nav {
+  opacity: 1;
+}
+
+.wc-nav.prev {
+  left: 20px;
+}
+.wc-nav.next {
+  right: 20px;
+}
+
+.wc-nav:hover {
+  background: var(--theme-primary, #0ba3e0);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .wc-bottom {
+    flex-direction: column;
+    padding: 20px;
+  }
+  .wc-hero {
+    height: 250px;
+  }
+  .wc-shape-container {
+    height: 100px;
+    padding: 15px 20px;
+    clip-path: polygon(0 30%, 30% 100%, 65% 20%, 100% 60%, 100% 100%, 0 100%);
+  }
+  .wc-month-text {
+    font-size: 28px;
+  }
+  .wc-year {
+    font-size: 18px;
+  }
+  .wc-notes {
+    order: 2; /* Move notes below calendar on mobile */
+  }
+  .wc-calendar {
+    order: 1;
+  }
+  .wc-nav {
+    opacity: 1;
+  }
+}
+
+/* Page flip animation */
+.page-flip-anim {
+  animation: pageFlip 0.6s ease-in-out;
+  transform-origin: top center;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@keyframes pageFlip {
+  0% { transform: rotateX(0deg); opacity: 1; }
+  50% { transform: rotateX(90deg); opacity: 0; }
+  51% { transform: rotateX(-90deg); opacity: 0; }
+  100% { transform: rotateX(0deg); opacity: 1; }
+}
